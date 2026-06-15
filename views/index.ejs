@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog App</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<h1>My Blog</h1>
+
+<form action="/create" method="POST">
+
+    <input
+        type="text"
+        name="author"
+        placeholder="Author Name"
+        required
+    >
+
+    <input
+        type="text"
+        name="title"
+        placeholder="Blog Title"
+        required
+    >
+
+    <select name="category">
+        <option>Tech</option>
+        <option>Lifestyle</option>
+        <option>Education</option>
+    </select>
+
+    <textarea
+        name="content"
+        placeholder="Write your post..."
+        required
+    ></textarea>
+
+    <button type="submit">
+        Create Post
+    </button>
+
+</form>
+
+<hr>
+
+<!-- Filter Form -->
+<form method="GET" action="/">
+  <select name="category">
+    <option value="All">All</option>
+    <option value="Tech">Tech</option>
+    <option value="Lifestyle">Lifestyle</option>
+    <option value="Education">Education</option>
+  </select>
+
+  <button type="submit">Filter</button>
+</form>
+
+<hr>
+
+<% posts.forEach(post => { %>
+
+<div class="post">
+    <h2><%= post.title %></h2>
+
+    <p>By <strong><%= post.author %></strong></p>
+
+    <p><%= post.createdAt %></p>
+
+    <p>Category: <%= post.category %></p>
+
+    <p><%= post.content %></p>
+    
+     <a href="/edit/<%= post.id %>">Edit</a>
+
+    <form action="/delete/<%= post.id %>" method="POST" style="display:inline;">
+    <button type="submit">Delete</button>
+    </form>
+</div>
+
+<% }) %>
+
+</body>
+</html>
